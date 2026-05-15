@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-Hant" data-lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MINERVA · Cyberpunk Operator Interface for the Mythic C2 Framework</title>
+<link rel="stylesheet" href="colors_and_type.css" />
+<link rel="stylesheet" href="site.css" />
+<script src="copy.js" defer></script>
+</head>
+<body>
+<div class="site" data-lang-body>
+
+  <!-- ── NAV ─────────────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__brand">
+        <img class="mark" src="assets/logos/minerva.png" alt="MINERVA" />
+        <span>MINERVA</span>
+      </div>
+      <div class="nav__links">
+        <a href="#features"  data-t="nav.features"></a>
+        <a href="#why"       data-t="nav.why"></a>
+        <a href="#interface" data-t="nav.interface"></a>
+        <a href="#stack"     data-t="nav.stack"></a>
+      </div>
+      <div class="nav__spacer"></div>
+      <div class="nav__status">
+        <span class="dot-live"></span>
+        <span data-t="nav.status"></span>
+      </div>
+      <div class="lang" role="group" aria-label="Language">
+        <button data-set-lang="zh">繁中</button>
+        <button data-set-lang="en">EN</button>
+      </div>
+      <button class="nav__cta" data-t="nav.cta"></button>
+    </div>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────────────────────────── -->
+  <section class="hero" id="overview">
+    <div class="hero__grid"></div>
+    <div class="hero__glow"></div>
+    <div class="hero__inner">
+      <div class="reveal">
+        <div class="hero__cap">
+          <span class="pulse"></span>
+          <span data-t="hero.cap"></span>
+        </div>
+        <h1 class="hero__h1">
+          MINERVA<span class="dot">.</span>
+        </h1>
+        <div class="hero__sub" data-list="hero.sub" data-sep="·"></div>
+        <p class="hero__lede" data-t="hero.lede"></p>
+        <div class="hero__cta-row">
+          <button class="cta cta--primary" data-t="hero.cta1"></button>
+          <button class="cta" data-t="hero.cta2"></button>
+        </div>
+      </div>
+
+      <div class="hud reveal" id="hero-hud">
+        <div class="hud__row hud__head">
+          <span class="k" data-t="hero.hud.label"></span>
+          <span class="v accent">●</span>
+        </div>
+        <div id="hud-rows"></div>
+      </div>
+    </div>
+
+    <!-- Stats band -->
+    <div class="stats reveal" id="stats-band"></div>
+  </section>
+
+  <!-- ── FEATURES ────────────────────────────────────────────────────── -->
+  <section class="sec" id="features">
+    <header class="sec__head reveal">
+      <div class="sec__cap" data-t="features.cap"></div>
+      <h2 class="sec__title" data-t="features.title"></h2>
+      <p class="sec__lede" data-t="features.lede"></p>
+    </header>
+    <div class="features" id="features-grid"></div>
+  </section>
+
+  <!-- ── PILLARS / ADVANTAGES ────────────────────────────────────────── -->
+  <section class="sec sec--quiet">
+    <header class="sec__head reveal">
+      <div class="sec__cap" data-t="pillars.cap"></div>
+      <h2 class="sec__title" data-t="pillars.title"></h2>
+    </header>
+    <div class="pillars" id="pillars-grid"></div>
+  </section>
+
+  <!-- ── WHY · vs DEFAULT MYTHIC UI ──────────────────────────────────── -->
+  <section class="sec" id="why">
+    <header class="sec__head reveal">
+      <div class="sec__cap" data-t="why.cap"></div>
+      <h2 class="sec__title" data-t="why.title"></h2>
+      <p class="sec__lede" data-t="why.lede"></p>
+    </header>
+    <div class="compare reveal" id="compare-table"></div>
+  </section>
+
+  <!-- ── INTERFACE / SHOTS ───────────────────────────────────────────── -->
+  <section class="sec" id="interface">
+    <header class="sec__head reveal">
+      <div class="sec__cap" data-t="interface.cap"></div>
+      <h2 class="sec__title" data-t="interface.title"></h2>
+      <p class="sec__lede" data-t="interface.lede"></p>
+    </header>
+    <div class="shots" id="shots-grid"></div>
+  </section>
+
+  <!-- ── USE CASES ───────────────────────────────────────────────────── -->
+  <section class="sec sec--quiet">
+    <header class="sec__head reveal">
+      <div class="sec__cap" data-t="cases.cap"></div>
+      <h2 class="sec__title" data-t="cases.title"></h2>
+    </header>
+    <div class="cases" id="cases-grid"></div>
+  </section>
+
+  <!-- ── STACK ───────────────────────────────────────────────────────── -->
+  <section class="sec" id="stack">
+    <header class="sec__head reveal">
+      <div class="sec__cap" data-t="stack.cap"></div>
+      <h2 class="sec__title" data-t="stack.title"></h2>
+      <p class="sec__lede" data-t="stack.lede"></p>
+    </header>
+    <div class="stack" id="stack-grid"></div>
+  </section>
+
+  <!-- ── QUOTE ───────────────────────────────────────────────────────── -->
+  <section class="sec quote-sec">
+    <div class="quote reveal">
+      <div class="quote__mark">"</div>
+      <div class="quote__body" data-t="quote.body"></div>
+      <div class="quote__attr">
+        <div><b data-t="quote.name"></b></div>
+        <div data-t="quote.role"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA / DEPLOY ────────────────────────────────────────────────── -->
+  <section class="sec cta-sec">
+    <div class="cta-block reveal">
+      <div class="sec__cap" data-t="cta.cap"></div>
+      <h2 class="sec__title cta-block__title" data-t="cta.title"></h2>
+      <p class="sec__lede" data-t="cta.lede"></p>
+      <div class="cta-block__row">
+        <button class="cta cta--primary" data-t="cta.primary"></button>
+        <button class="cta" data-t="cta.secondary"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
+  <footer class="foot">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <div class="mark">
+          <img src="assets/logos/minerva.png" alt="MINERVA" />
+          <span>MINERVA</span>
+        </div>
+        <p data-t="foot.tag"></p>
+      </div>
+      <div class="foot__col">
+        <h5 data-t="foot.product"></h5>
+        <a data-t="foot.p.overview"></a>
+        <a data-t="foot.p.features"></a>
+        <a data-t="foot.p.changelog"></a>
+        <a data-t="foot.p.roadmap"></a>
+      </div>
+      <div class="foot__col">
+        <h5 data-t="foot.resources"></h5>
+        <a data-t="foot.r.docs"></a>
+        <a data-t="foot.r.github"></a>
+        <a data-t="foot.r.mythic"></a>
+        <a data-t="foot.r.discord"></a>
+      </div>
+      <div class="foot__col">
+        <h5 data-t="foot.legal"></h5>
+        <a data-t="foot.l.license"></a>
+        <a data-t="foot.l.terms"></a>
+        <a data-t="foot.l.ethics"></a>
+        <a data-t="foot.l.contact"></a>
+      </div>
+    </div>
+    <div class="foot__bot">
+      <span data-t="foot.bot.copy"></span>
+      <span class="legal">
+        <span data-t="foot.bot.build"></span>
+        <span>UTC <span id="clock">--:--:--</span></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Icons -->
+<svg style="display:none">
+  <symbol id="i-graph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="14" r="2.2"/><circle cx="6" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/>
+    <path d="M6.5 7.4 L10.6 12.7 M17.5 7.4 L13.4 12.7 M11 15.5 L7 18.7 M13 15.5 L17 18.7"/>
+  </symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3 L21 8 V16 L12 21 L3 16 V8 Z"/><path d="M3 8 L12 13 L21 8"/><path d="M12 13 V21"/>
+  </symbol>
+  <symbol id="i-term" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="16"/><path d="M7 9 L10 12 L7 15"/><path d="M12 16 H17"/>
+  </symbol>
+  <symbol id="i-battle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+    <path d="M12 2 V5 M12 19 V22 M2 12 H5 M19 12 H22"/>
+  </symbol>
+  <symbol id="i-audio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 10 V14 M8 7 V17 M12 4 V20 M16 8 V16 M20 11 V13"/>
+  </symbol>
+  <symbol id="i-theme" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/><path d="M12 3 A9 9 0 0 0 12 21 Z" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12 L10 18 L20 6"/>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 6 L18 18 M18 6 L6 18"/>
+  </symbol>
+</svg>
+
+<script>
+(function() {
+  let lang = 'zh';
+  const body = document.querySelector('[data-lang-body]');
+  const lookup = p => p.split('.').reduce((o,k) => o && o[k], window.COPY);
+
+  function render() {
+    document.documentElement.setAttribute('lang', lang==='zh'?'zh-Hant':'en');
+
+    document.querySelectorAll('[data-t]').forEach(el => {
+      const v = lookup(el.dataset.t);
+      if (v && typeof v === 'object' && v[lang] !== undefined) el.textContent = v[lang];
+    });
+
+    document.querySelectorAll('[data-list]').forEach(el => {
+      const arr = lookup(el.dataset.list);
+      const sep = el.dataset.sep || '·';
+      el.innerHTML = arr.map((v,i)=>
+        `<b>${v[lang]}</b>${i<arr.length-1?` <span class="div">${sep}</span>`:''}`).join(' ');
+    });
+
+    document.querySelectorAll('[data-set-lang]').forEach(b =>
+      b.classList.toggle('is-active', b.dataset.setLang === lang));
+
+    // Stats
+    document.getElementById('stats-band').innerHTML = COPY.stats.map(s => `
+      <div class="stat">
+        <div class="stat__v">${s.v}</div>
+        <div class="stat__k">${s.k[lang]}</div>
+        <div class="stat__sub">${s.sub[lang]}</div>
+      </div>`).join('');
+
+    // HUD rows
+    document.getElementById('hud-rows').innerHTML = COPY.hero.hud.rows.map(r =>
+      `<div class="hud__row"><span class="k">${r.k[lang]}</span><span class="v ${r.tone||''}">${r.v[lang]}</span></div>`
+    ).join('');
+
+    // Features (with screenshots)
+    document.getElementById('features-grid').innerHTML = COPY.features.items.map(f => `
+      <article class="feature">
+        <div class="feature__shot"><img src="${f.shot}" alt="${f.t[lang]}"/><div class="feature__shot-overlay"></div></div>
+        <div class="feature__body">
+          <div class="feature__top">
+            <span class="feature__num">FEATURE / ${f.n}</span>
+            <span class="feature__icon"><svg><use href="#i-${f.icon}"/></svg></span>
+          </div>
+          <h3>${f.t[lang]}</h3>
+          <p>${f.d[lang]}</p>
+          <div class="feature__tag">${f.tag[lang]}</div>
+        </div>
+      </article>`).join('');
+
+    // Pillars
+    document.getElementById('pillars-grid').innerHTML = COPY.pillars.items.map(p => `
+      <div class="pillar">
+        <div class="pillar__num">${p.num}</div>
+        <h3>${p.t[lang]}</h3>
+        <p>${p.d[lang]}</p>
+      </div>`).join('');
+
+    // Compare table
+    const c = COPY.why.compare;
+    document.getElementById('compare-table').innerHTML = `
+      <div class="compare__head">
+        <div class="compare__cell"></div>
+        <div class="compare__cell compare__col-a"><span class="compare__brand">${c.head.mythic[lang]}</span></div>
+        <div class="compare__cell compare__col-b"><span class="compare__brand compare__brand--us">${c.head.minerva[lang]}</span></div>
+      </div>
+      ${c.rows.map((r,i) => `
+        <div class="compare__row" style="--i:${i}">
+          <div class="compare__cell compare__key">${r.k[lang]}</div>
+          <div class="compare__cell compare__col-a"><svg class="ico ico--x"><use href="#i-x"/></svg><span>${r.a[lang]}</span></div>
+          <div class="compare__cell compare__col-b"><svg class="ico ico--ok"><use href="#i-check"/></svg><span>${r.b[lang]}</span></div>
+        </div>`).join('')}`;
+
+    // Shots
+    document.getElementById('shots-grid').innerHTML = COPY.interface.shots.map((s,i) => `
+      <div class="shot ${i===0?'shot--wide':''}">
+        <img class="shot__img" src="${s.src}" alt="${s.t[lang]}"/>
+        <div class="shot__corners"><i></i><i></i><i></i><i></i></div>
+        <div class="shot__cap"><b>${s.t[lang]}</b><span>${s.sub[lang]}</span></div>
+      </div>`).join('');
+
+    // Cases
+    document.getElementById('cases-grid').innerHTML = COPY.cases.items.map(c => `
+      <div class="case">
+        <div class="case__tag">${c.tag[lang]}</div>
+        <h3>${c.t[lang]}</h3>
+        <p>${c.d[lang]}</p>
+      </div>`).join('');
+
+    // Stack
+    document.getElementById('stack-grid').innerHTML = COPY.stack.cells.map(c => `
+      <div class="stack__cell">
+        <div class="stack__name">${c.name}</div>
+        <div class="stack__meta">${c.meta[lang]}</div>
+      </div>`).join('');
+  }
+
+  function setLang(next) {
+    if (next === lang) return;
+    body.classList.add('is-switching');
+    setTimeout(() => { lang = next; render(); body.classList.remove('is-switching'); }, 180);
+  }
+  document.querySelectorAll('[data-set-lang]').forEach(b =>
+    b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+  // UTC clock
+  function tick() {
+    const d = new Date(), pad = n => String(n).padStart(2,'0');
+    document.getElementById('clock').textContent =
+      pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+':'+pad(d.getUTCSeconds());
+  }
+  setInterval(tick, 1000); tick();
+
+  // Boot
+  if (window.COPY) render();
+  else window.addEventListener('DOMContentLoaded', render);
+
+  // Scroll reveal — re-attach after render
+  function attachReveal() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .feature, .pillar, .case, .stack__cell, .shot, .stat, .compare__row').forEach(el => io.observe(el));
+  }
+  // After first paint
+  requestAnimationFrame(() => requestAnimationFrame(attachReveal));
+})();
+</script>
+
+</body>
+</html>

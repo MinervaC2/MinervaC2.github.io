@@ -1,0 +1,243 @@
+/* ============================================================
+   MINERVA C2 — DESIGN TOKENS
+   Cyberpunk operator interface · dark by default
+   ============================================================ */
+
+/* Self-host JetBrains Mono + Inter via Google fonts CDN
+   (matches the brand's mono+sans pairing). If you copy this
+   file into another project, swap the @import for local woff2
+   files in /fonts when offline. */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* ── CORE PALETTE (rgb triplets so they compose with /alpha) ───────── */
+  --color-void:    0   0   0;     /* canvas / page background      */
+  --color-signal:  255 255 255;   /* foreground text + highlights  */
+  --color-accent:  34  197 94;    /* default green operator accent */
+  --color-ghost:   153 153 153;   /* borders + secondary chrome    */
+  --color-machine: 51  51  51;    /* card / panel background       */
+
+  /* Cyberpunk extras — used across modules */
+  --color-cyan:     34 211 238;   /* HUD/scanner cyan (#22d3ee)    */
+  --color-amber:    245 158 11;   /* warning / custom-node amber   */
+  --color-red:      239 68  68;   /* SESSION_DEAD / combat / error */
+  --color-magenta:  217 70  239;  /* p2p / interactive halos       */
+  --color-blue:     59  130 246;  /* info / metric blue            */
+
+  /* ── ALIAS TOKENS ──────────────────────────────────────────────────── */
+  --bg:           rgb(var(--color-void));
+  --bg-elev-1:    rgb(var(--color-void));            /* full black backdrop */
+  --bg-elev-2:    rgba(255,255,255,0.03);            /* panel wash         */
+  --bg-elev-3:    rgba(255,255,255,0.05);            /* hover wash         */
+  --bg-card:      rgba(5,7,12,0.97);                 /* modals + toasts    */
+  --fg:           rgb(var(--color-signal));
+  --fg-dim:       rgba(255,255,255,0.65);
+  --fg-mute:      rgba(255,255,255,0.40);
+  --fg-faint:     rgba(255,255,255,0.18);
+  --border:       rgba(255,255,255,0.10);
+  --border-strong:rgba(255,255,255,0.20);
+  --border-faint: rgba(255,255,255,0.05);
+
+  --accent:       rgb(var(--color-accent));
+  --accent-dim:   rgba(var(--color-accent),0.6);
+  --cyan:         rgb(var(--color-cyan));
+  --amber:        rgb(var(--color-amber));
+  --red:          rgb(var(--color-red));
+  --magenta:      rgb(var(--color-magenta));
+
+  /* ── TYPOGRAPHY ────────────────────────────────────────────────────── */
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Scale — designed for 16:9 dense ops consoles */
+  --fs-mega:   clamp(48px, 7vw, 112px);  /* display headline */
+  --fs-hero:   clamp(36px, 5vw, 72px);   /* page hero */
+  --fs-h1:     clamp(28px, 3vw, 44px);
+  --fs-h2:     22px;
+  --fs-h3:     16px;
+  --fs-body:   14px;
+  --fs-small:  12px;
+  --fs-micro:  10px;                     /* HUD labels, mono caps */
+
+  --lh-tight:  1.05;
+  --lh-snug:   1.25;
+  --lh-body:   1.55;
+
+  --tracking-mega:  -0.04em;             /* tighten very large display */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:  0.08em;              /* mono section captions */
+  --tracking-mega-wide: 0.24em;          /* HUD labels (e.g. SUCCESS_RATE) */
+
+  /* ── SPACING (4px grid) ────────────────────────────────────────────── */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── RADII ─────────────────────────────────────────────────────────── */
+  --radius-0:   0;
+  --radius-sm:  2px;
+  --radius-md:  4px;
+  --radius-lg:  8px;
+  --radius-pill: 999px;
+
+  /* ── BORDERS ───────────────────────────────────────────────────────── */
+  --hairline:   1px solid var(--border);
+  --hairline-strong: 1px solid var(--border-strong);
+  --accent-rule:2px solid var(--accent);
+
+  /* ── SHADOWS / GLOWS ───────────────────────────────────────────────── */
+  --shadow-card:   0 12px 40px rgba(0,0,0,0.85);
+  --shadow-modal:  0 24px 80px rgba(0,0,0,0.9);
+  --glow-accent:   0 0 24px rgba(var(--color-accent), 0.35);
+  --glow-cyan:     0 0 24px rgba(var(--color-cyan),   0.35);
+  --glow-red:      0 0 24px rgba(var(--color-red),    0.40);
+
+  /* ── MOTION ───────────────────────────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.22, 0.68, 0, 1.2);
+  --ease-snap:   cubic-bezier(0, 0, 0.2, 1);
+  --dur-fast:    120ms;
+  --dur-base:    220ms;
+  --dur-slow:    420ms;
+
+  /* ── BG TEXTURES ───────────────────────────────────────────────────── */
+  --tex-scanlines: linear-gradient(
+      rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%
+    ),
+    linear-gradient(90deg,
+      rgba(255,0,0,0.06),
+      rgba(0,255,0,0.02),
+      rgba(0,0,255,0.06));
+  --tex-grid: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  --tex-grid-size: 32px 32px;
+}
+
+/* ============================================================
+   SEMANTIC ELEMENTS
+   Use these on plain HTML; designed to be drop-in.
+   ============================================================ */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tracking-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── DISPLAY / HEADINGS ─────────────────────────────────────── */
+.mv-display,
+.mv-mega {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: var(--fs-mega);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-mega);
+  color: var(--fg);
+  text-transform: uppercase;
+}
+
+.mv-hero {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: var(--fs-hero);
+  line-height: 1.02;
+  letter-spacing: var(--tracking-tight);
+}
+
+h1, .mv-h1 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+}
+
+h2, .mv-h2 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+}
+
+h3, .mv-h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  color: var(--fg);
+}
+
+p, .mv-body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg-dim);
+}
+
+/* ── HUD LABELS ─────────────────────────────────────────────── 
+   The signature Minerva caption style.
+   Example: <span class="mv-label">SESSION_STATUS</span> */
+.mv-label,
+.mv-caption {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mega-wide);
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  line-height: 1;
+}
+
+.mv-label--strong { color: var(--fg); }
+.mv-label--accent { color: var(--accent); }
+.mv-label--cyan   { color: var(--cyan);   }
+.mv-label--red    { color: var(--red);    }
+.mv-label--amber  { color: var(--amber);  }
+
+/* ── MONO DATA (numbers, hex, IPs, telemetry) ───────────────── */
+.mv-mono,
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+}
+
+.mv-mono-big {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.mv-mono-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ── LINKS ──────────────────────────────────────────────────── */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-snap);
+}
+a:hover { color: var(--cyan); }
