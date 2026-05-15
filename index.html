@@ -326,10 +326,29 @@
       </div>`).join('');
   }
 
+  // Scroll reveal — single shared observer, re-run after every render()
+  let revealObserver = null;
+  function attachReveal() {
+    if (!revealObserver) {
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); revealObserver.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+    }
+    document.querySelectorAll('.reveal, .feature, .pillar, .case, .stack__cell, .shot, .stat, .compare__row')
+      .forEach(el => { if (!el.classList.contains('is-in')) revealObserver.observe(el); });
+  }
+
   function setLang(next) {
     if (next === lang) return;
     body.classList.add('is-switching');
-    setTimeout(() => { lang = next; render(); body.classList.remove('is-switching'); }, 180);
+    setTimeout(() => {
+      lang = next;
+      render();
+      attachReveal();
+      body.classList.remove('is-switching');
+    }, 180);
   }
   document.querySelectorAll('[data-set-lang]').forEach(b =>
     b.addEventListener('click', () => setLang(b.dataset.setLang)));
@@ -342,19 +361,12 @@
   }
   setInterval(tick, 1000); tick();
 
-  // Boot
-  if (window.COPY) render();
-  else window.addEventListener('DOMContentLoaded', render);
-
-  // Scroll reveal — re-attach after render
-  function attachReveal() {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal, .feature, .pillar, .case, .stack__cell, .shot, .stat, .compare__row').forEach(el => io.observe(el));
-  }
-  // After first paint
-  requestAnimationFrame(() => requestAnimationFrame(attachReveal));
+  // Boot — render() MUST run before attachReveal(), otherwise dynamically
+  // created cards (features/pillars/cases/shots/stack/stats/compare rows) are
+  // never observed and stay stuck at opacity:0.
+  function boot() { render(); attachReveal(); }
+  if (window.COPY) boot();
+  else window.addEventListener('DOMContentLoaded', boot);
 })();
 </script>
 
