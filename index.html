@@ -33,7 +33,7 @@
         <button data-set-lang="zh">繁中</button>
         <button data-set-lang="en">EN</button>
       </div>
-      <button class="nav__cta" data-t="nav.cta"></button>
+      <button class="nav__cta" data-action="scroll" data-target="#deploy" data-t="nav.cta"></button>
     </div>
   </nav>
 
@@ -53,8 +53,8 @@
         <div class="hero__sub" data-list="hero.sub" data-sep="·"></div>
         <p class="hero__lede" data-t="hero.lede"></p>
         <div class="hero__cta-row">
-          <button class="cta cta--primary" data-t="hero.cta1"></button>
-          <button class="cta" data-t="hero.cta2"></button>
+          <button class="cta cta--primary" data-action="copy-clone" data-t="hero.cta1"></button>
+          <button class="cta" data-action="scroll" data-target="#interface" data-t="hero.cta2"></button>
         </div>
       </div>
 
@@ -142,14 +142,14 @@
   </section>
 
   <!-- ── CTA / DEPLOY ────────────────────────────────────────────────── -->
-  <section class="sec cta-sec">
+  <section class="sec cta-sec" id="deploy">
     <div class="cta-block reveal">
       <div class="sec__cap" data-t="cta.cap"></div>
       <h2 class="sec__title cta-block__title" data-t="cta.title"></h2>
       <p class="sec__lede" data-t="cta.lede"></p>
       <div class="cta-block__row">
-        <button class="cta cta--primary" data-t="cta.primary"></button>
-        <button class="cta" data-t="cta.secondary"></button>
+        <button class="cta cta--primary" data-action="copy-clone" data-t="cta.primary"></button>
+        <button class="cta" data-action="open" data-href="https://github.com/aifred0729-TW/Minerva" data-t="cta.secondary"></button>
       </div>
     </div>
   </section>
@@ -166,24 +166,24 @@
       </div>
       <div class="foot__col">
         <h5 data-t="foot.product"></h5>
-        <a data-t="foot.p.overview"></a>
-        <a data-t="foot.p.features"></a>
-        <a data-t="foot.p.changelog"></a>
-        <a data-t="foot.p.roadmap"></a>
+        <a href="#overview" data-action="scroll" data-target="#overview" data-t="foot.p.overview"></a>
+        <a href="#features" data-action="scroll" data-target="#features" data-t="foot.p.features"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva/releases" target="_blank" rel="noopener noreferrer" data-t="foot.p.changelog"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva/issues" target="_blank" rel="noopener noreferrer" data-t="foot.p.roadmap"></a>
       </div>
       <div class="foot__col">
         <h5 data-t="foot.resources"></h5>
-        <a data-t="foot.r.docs"></a>
-        <a data-t="foot.r.github"></a>
-        <a data-t="foot.r.mythic"></a>
-        <a data-t="foot.r.discord"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva#readme" target="_blank" rel="noopener noreferrer" data-t="foot.r.docs"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva" target="_blank" rel="noopener noreferrer" data-t="foot.r.github"></a>
+        <a href="https://github.com/its-a-feature/Mythic" target="_blank" rel="noopener noreferrer" data-t="foot.r.mythic"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva/discussions" target="_blank" rel="noopener noreferrer" data-t="foot.r.discord"></a>
       </div>
       <div class="foot__col">
         <h5 data-t="foot.legal"></h5>
-        <a data-t="foot.l.license"></a>
-        <a data-t="foot.l.terms"></a>
-        <a data-t="foot.l.ethics"></a>
-        <a data-t="foot.l.contact"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-t="foot.l.license"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-t="foot.l.terms"></a>
+        <a href="https://github.com/aifred0729-TW/Minerva#readme" target="_blank" rel="noopener noreferrer" data-t="foot.l.ethics"></a>
+        <a href="mailto:aifred0729tw@gmail.com" data-t="foot.l.contact"></a>
       </div>
     </div>
     <div class="foot__bot">
@@ -196,6 +196,8 @@
   </footer>
 
 </div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- Icons -->
 <svg style="display:none">
@@ -352,6 +354,57 @@
   }
   document.querySelectorAll('[data-set-lang]').forEach(b =>
     b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+  // ── Button / link actions ────────────────────────────────
+  const REPO_URL  = 'https://github.com/aifred0729-TW/Minerva';
+  const CLONE_CMD = 'git clone https://github.com/aifred0729-TW/Minerva.git';
+  const TOAST_MSG = {
+    copied:    { zh: '已複製 git clone 指令', en: 'Copied git clone command' },
+    copyFail:  { zh: '複製失敗,請手動複製',   en: 'Copy failed, please copy manually' },
+  };
+
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('is-on');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => el.classList.remove('is-on'), 1800);
+  }
+
+  async function copyClone() {
+    try {
+      await navigator.clipboard.writeText(CLONE_CMD);
+      showToast(TOAST_MSG.copied[lang]);
+    } catch {
+      // Fallback for non-secure contexts / older browsers
+      const ta = document.createElement('textarea');
+      ta.value = CLONE_CMD;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast(TOAST_MSG.copied[lang]); }
+      catch { showToast(TOAST_MSG.copyFail[lang]); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    const action = t.dataset.action;
+    if (action === 'copy-clone') {
+      e.preventDefault();
+      copyClone();
+    } else if (action === 'scroll') {
+      e.preventDefault();
+      const el = document.querySelector(t.dataset.target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (action === 'open') {
+      e.preventDefault();
+      window.open(t.dataset.href, '_blank', 'noopener,noreferrer');
+    }
+  });
 
   // UTC clock
   function tick() {
