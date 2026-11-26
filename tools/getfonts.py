@@ -43,6 +43,6 @@ fetch_css('family=Noto+Sans+TC:wght@400;500&display=swap&text=' + urllib.parse.q
 
 with open(os.path.join(out, 'fonts.css'), 'w', encoding='utf-8') as f:
     f.write('/* Self-hosted subsets of Geist, JetBrains Mono (OFL) and Noto Sans TC (OFL, only the characters this page uses).\n'
-            '   Rebuild after changing the Chinese copy: python3 getfonts.py index.html fonts */\n')
+            '   Rebuild after changing the Chinese copy: python3 -I tools/getfonts.py index.html fonts (from the repo root) */\n')
     f.write('\n'.join(faces) + '\n')
 print('faces', len(faces))
